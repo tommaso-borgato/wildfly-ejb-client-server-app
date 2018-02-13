@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.redhat.qe</groupId>
+        <artifactId>ejb-client-server</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>ejb-server</artifactId>
+    <packaging>war</packaging>
+    <name>${project.artifactId}: SERVER</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Our EJBs -->
+        <dependency>
+            <groupId>com.redhat.qe</groupId>
+            <artifactId>ejb-jar</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!--
+            ==================================================
+            Kepp EJBs names simple:
+            ejb:/ejb-server/CalculatorBean!com.redhat.qe.ejb.stateless.RemoteCalculator
+            ejb:/ejb-server/CounterBean!com.redhat.qe.ejb.stateful.RemoteCounter?stateful
+            ==================================================
+        -->
+        <finalName>${project.artifactId}</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+
+            <!--
+				==================================================
+				deploy war on WilfFly nodes
+				==================================================
+			-->
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>node1</id>
+                        <configuration>
+                            <hostname>127.0.0.1</hostname>
+                            <port>9990</port>
+                            <skip>false</skip>
+                            <username>admin</username>
+                            <password>admin</password>
+                        </configuration>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>node2</id>
+                        <configuration>
+                            <hostname>127.0.0.1</hostname>
+                            <port>10090</port>
+                            <skip>false</skip>
+                            <username>admin</username>
+                            <password>admin</password>
+                        </configuration>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
