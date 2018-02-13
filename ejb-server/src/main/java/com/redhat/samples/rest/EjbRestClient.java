@@ -1,7 +1,7 @@
-package com.redhat.qe.rest;
+package com.redhat.samples.rest;
 
-import com.redhat.qe.ejb.stateful.LocalCounter;
-import com.redhat.qe.ejb.stateless.LocalCalculator;
+import com.redhat.samples.ejb.stateful.LocalCounter;
+import com.redhat.samples.ejb.stateless.LocalCalculator;
 
 import javax.ejb.EJB;
 import javax.websocket.server.PathParam;

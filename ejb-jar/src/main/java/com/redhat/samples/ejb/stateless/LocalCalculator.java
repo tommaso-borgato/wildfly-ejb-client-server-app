@@ -1,13 +1,13 @@
 /**
  * 
  */
-package com.redhat.qe.ejb.stateless;
+package com.redhat.samples.ejb.stateless;
 
 /**
  * @author tborgato
  *
  */
-public interface RemoteCalculator {
+public interface LocalCalculator {
     int add(int a, int b);
     
     int subtract(int a, int b);

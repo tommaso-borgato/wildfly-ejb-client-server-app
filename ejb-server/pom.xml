@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.redhat.qe</groupId>
+        <groupId>com.redhat.samples</groupId>
         <artifactId>ejb-client-server</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -20,7 +20,7 @@
         </dependency>
         <!-- Our EJBs -->
         <dependency>
-            <groupId>com.redhat.qe</groupId>
+            <groupId>com.redhat.samples</groupId>
             <artifactId>ejb-jar</artifactId>
         </dependency>
     </dependencies>
@@ -29,8 +29,8 @@
         <!--
             ==================================================
             Kepp EJBs names simple:
-            ejb:/ejb-server/CalculatorBean!com.redhat.qe.ejb.stateless.RemoteCalculator
-            ejb:/ejb-server/CounterBean!com.redhat.qe.ejb.stateful.RemoteCounter?stateful
+            ejb:/ejb-server/CalculatorBean!com.redhat.samples.ejb.stateless.RemoteCalculator
+            ejb:/ejb-server/CounterBean!com.redhat.samples.ejb.stateful.RemoteCounter?stateful
             ==================================================
         -->
         <finalName>${project.artifactId}</finalName>

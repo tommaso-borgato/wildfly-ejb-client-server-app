@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.redhat.qe.ejb.stateful;
+package com.redhat.samples.ejb.stateful;
 
 import javax.ejb.Local;
 import javax.ejb.Remote;

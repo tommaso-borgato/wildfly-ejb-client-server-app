@@ -1,13 +1,12 @@
-package com.redhat.qe.ejb.client;
+package com.redhat.samples.ejb.client;
 
-import com.redhat.qe.ejb.stateful.RemoteCounter;
-import com.redhat.qe.ejb.stateless.RemoteCalculator;
+import com.redhat.samples.ejb.stateful.RemoteCounter;
+import com.redhat.samples.ejb.stateless.RemoteCalculator;
 import org.wildfly.naming.client.WildFlyInitialContextFactory;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import java.security.PrivilegedActionException;
 import java.util.Properties;
 
 /**
@@ -20,7 +19,7 @@ import java.util.Properties;
 public class EjbRemoteClient {
 	
 	public static void main(String[] args)
-            throws NamingException, PrivilegedActionException, InterruptedException {
+            throws NamingException {
 		
 		System.out.println(
 		        "===============================================\n" +
@@ -28,7 +27,7 @@ public class EjbRemoteClient {
                 "===============================================");
         InitialContext ctx1 = new InitialContext(getCtxPropertiesNode1());
         String lookupNameRemoteCalculator = 
-        		"ejb:/ejb-server/CalculatorBean!com.redhat.qe.ejb.stateless.RemoteCalculator";
+        		"ejb:/ejb-server/CalculatorBean!com.redhat.samples.ejb.stateless.RemoteCalculator";
         RemoteCalculator bean1 = (RemoteCalculator)ctx1.lookup(lookupNameRemoteCalculator);
         System.out.println("RemoteCalculator.add(1,2)=" + bean1.add(1, 2) + "\n");
         ctx1.close();
@@ -39,7 +38,7 @@ public class EjbRemoteClient {
                 "===============================================");
         InitialContext ctx2 = new InitialContext(getCtxPropertiesNode2());
         String lookupNameRemoteCounter = 
-        		"ejb:/ejb-server/CounterBean!com.redhat.qe.ejb.stateful.RemoteCounter?stateful";
+        		"ejb:/ejb-server/CounterBean!com.redhat.samples.ejb.stateful.RemoteCounter?stateful";
         RemoteCounter bean2 = (RemoteCounter)ctx2.lookup(lookupNameRemoteCounter);
         System.out.println("RemoteCounter.getCount()=" + bean2.getCount());
         System.out.println("RemoteCounter.increment()");

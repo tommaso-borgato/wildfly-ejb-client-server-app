@@ -1,13 +1,13 @@
 /**
  * 
  */
-package com.redhat.qe.ejb.stateful;
+package com.redhat.samples.ejb.stateful;
 
 /**
  * @author tborgato
  *
  */
-public interface LocalCounter {
+public interface RemoteCounter {
 	void increment();
 	 
     void decrement();

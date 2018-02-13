@@ -1,4 +1,4 @@
-package com.redhat.qe.rest;
+package com.redhat.samples.rest;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
