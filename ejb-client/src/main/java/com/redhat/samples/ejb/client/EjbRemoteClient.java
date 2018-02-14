@@ -1,5 +1,6 @@
 package com.redhat.samples.ejb.client;
 
+import com.redhat.samples.ejb.clustered.RemoteClustered;
 import com.redhat.samples.ejb.stateful.RemoteCounter;
 import com.redhat.samples.ejb.stateless.RemoteCalculator;
 import org.wildfly.naming.client.WildFlyInitialContextFactory;
@@ -45,6 +46,34 @@ public class EjbRemoteClient {
         bean2.increment();
         System.out.println("RemoteCounter.getCount()=" + bean2.getCount());
         ctx2.close();
+
+
+        System.out.println(
+                "===============================================\n" +
+                " ClusteredBean on NODE-1 \n" +
+                "===============================================");
+        String lookupNameRemoteClustered =
+                "ejb:/ejb-server/ClusteredBean!com.redhat.samples.ejb.clustered.RemoteClustered?stateful";
+
+        InitialContext ctx3 = new InitialContext(getCtxPropertiesNode1());
+        RemoteClustered bean3 = (RemoteClustered)ctx3.lookup(lookupNameRemoteClustered);
+        System.out.println("ClusteredBean.getCount()=" + bean3.getCount());
+        System.out.println("ClusteredBean.increment()");
+        bean3.increment();
+        System.out.println("ClusteredBean.getCount()=" + bean3.getCount());
+        ctx3.close();
+
+        System.out.println(
+                "===============================================\n" +
+                " ClusteredBean on NODE-2 \n" +
+                "===============================================");
+        InitialContext ctx4 = new InitialContext(getCtxPropertiesNode2());
+        RemoteClustered bean4 = (RemoteClustered)ctx4.lookup(lookupNameRemoteClustered);
+        System.out.println("ClusteredBean.getCount()=" + bean4.getCount());
+        System.out.println("ClusteredBean.increment()");
+        bean4.increment();
+        System.out.println("ClusteredBean.getCount()=" + bean4.getCount());
+        ctx4.close();
     }
 
     /**
